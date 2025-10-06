@@ -50,7 +50,7 @@ export default function Layout({children}) {
     { name: 'People', href: '/data/people', icon: UserIcon, current: pathname === '/data/people' ? true : false },
     { name: 'Institutions', href: '/data/organisations', icon: BuildingLibraryIcon, current: pathname === '/data/organisations' ? true : false },
     { name: 'Map', href: '/data/map', icon: MapIcon, current: pathname === '/data/map' ? true : false },
-    { name: 'Network', href: '/data/network', icon: UserGroupIcon, current: pathname === '/data/network' ? true : false },
+    // { name: 'Network', href: '/data/network', icon: UserGroupIcon, current: pathname === '/data/network' ? true : false },
   ]
 
   return (
