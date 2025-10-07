@@ -3,12 +3,14 @@ import { useQuery } from "@apollo/client/react";
 import { GET_ADDRESSES_WITH_MEMBER_ORGANISATIONS } from "@/graphql/queries/addresses";
 import Error from "@/components/Error";
 import Loading from "@/components/Loading";
-import { MapComponentsProvider } from "@mapcomponents/react-maplibre";
+// import { MapComponentsProvider } from "@mapcomponents/react-maplibre";
 import dynamic from 'next/dynamic';
 import FilterSideBar from "@/components/FilterSideBar";
 import { useState } from "react";
 
 const Map = dynamic(() => import('@/components/Map'), { ssr: false });  
+const MapComponentsProvider = dynamic(() => import('@mapcomponents/react-maplibre').then((mod) => mod.MapComponentsProvider), { ssr: false });
+
 
 export default function Page(props) {
 
