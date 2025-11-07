@@ -13,7 +13,7 @@ export default function FilterSideBar(props) {
     const [membershipTypes, setMembershipTypes] = useState([
         { id: 1, name: 'Institutional Member', selected: true },
         { id: 2, name: 'Individual Member', selected: true },
-        { id: 3, name: 'Honrary Member', selected: true },
+        { id: 3, name: 'Honorary Member', selected: true },
         { id: 4, name: 'Lifetime Member', selected: true },
     ])
 
@@ -25,22 +25,21 @@ export default function FilterSideBar(props) {
     useEffect(() => {
         if (props.setMapFilter) {
             const genderFilters = ['in', ['get', 'gender'], ['literal', genders.filter(g => g.selected).map(g => g.name)] || []];
-            const membershipTypeFilters = ['==', ['get', 'membershipType'], membershipTypes.filter(m => m.selected).map(m => m.name)[0] || ''];
-            const listYearFilters = ['==', ['get', 'listYear'], listYears.filter(l => l.selected).map(l => l.name)[0] || ''];
-            console.log('Filters:', [genderFilters, membershipTypeFilters, listYearFilters]);
-            props.setMapFilter([genderFilters])
+            const membershipTypeFilters = ['in', ['get', 'membershipType'], ['literal', membershipTypes.filter(m => m.selected).map(m => m.name)] || ''];
+            const listYearFilters = ['in', ['get', 'listYear'], ['literal', listYears.filter(l => l.selected).map(l => l.name)] || ''];
+            props.setMapFilter(['all', membershipTypeFilters, genderFilters, listYearFilters]);
         }
     }, [genders, membershipTypes, listYears])
 
 
     return (
-        <div className="overflow-scroll rounded-lg bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10 mt-8 mb-24 -ml-4 -mr-4">
+        <div className="overflow-auto rounded-tr-sm rounded-br-sm bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10 h-full mt-8 mb-24 -ml-4 -mr-4 border-l border-gray-300">
             <div className="px-4 py-5 sm:p-6">
                 <CheckBoxGroup items={genders} setItems={setGenders} title="Genders" />
                 <br />
-                <CheckBoxGroup items={membershipTypes} title="Membership Types" />
+                <CheckBoxGroup items={membershipTypes} setItems={setMembershipTypes} title="Membership Types" />
                 <br />
-                <CheckBoxGroup items={listYears} title="List Years" />
+                <CheckBoxGroup items={listYears} setItems={setListYears} title="List Years" />
             </div>
         </div>
     )

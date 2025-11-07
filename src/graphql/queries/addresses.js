@@ -18,6 +18,7 @@ export const GET_ADDRESSES_WITH_MEMBER_ORGANISATIONS = gql`query Addresses($page
         hasMembership {
           StartDate
           ListYear
+          Type
         }
         employees {
           Surname
