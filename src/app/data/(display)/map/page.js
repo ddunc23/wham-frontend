@@ -73,7 +73,7 @@ export default function Page(props) {
     return (
     <>
     <div className="col-span-3">
-        <div className="mt-8 mb-24 -ml-4 h-full">
+        <div className="mb-24 h-full">
             <Map initialViewState={{
                 longitude: -2.0,
                 latitude: 54.3,

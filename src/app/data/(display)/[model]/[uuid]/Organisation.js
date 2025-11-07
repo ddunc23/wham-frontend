@@ -20,7 +20,7 @@ export default function Organisation(props) {
 
 
     return (
-        <div className="col-span-4 overlow-y-scroll h-full mt-8">
+        <div className="col-span-4">
             <h3>{org.Name}</h3>
             {/*<Places model={props.model} uuid={props.uuid} />*/}
         </div>

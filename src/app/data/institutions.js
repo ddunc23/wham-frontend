@@ -26,7 +26,7 @@ export default function Institutions() {
     const fieldnames = Object.keys(organisations[0] || {}).map(fn => ['documentId', '__typename', 'uuid', 'attendedByCount'].includes(fn) ? null :  fn.replace(/([A-Z])/g, ' $1' ).trim()).filter(fn => fn);
 
     return (
-      <div className='col-span-4 overlow-y-scroll h-full mt-8'>
+      <div className='col-span-4 h-full w-full overflow-auto'>
         <h3 className="text-base font-semibold text-gray-900 dark:text-white">Institutions</h3>
         <ListDisplay items={organisations} pageInfo={data?.organisations_connection?.pageInfo || {}} fieldnames={fieldnames} model="organisations" setPage={setPage} page={page} />
         <Pagination pageInfo={data?.organisations_connection?.pageInfo || {}} setPage={setPage} page={page}/>
