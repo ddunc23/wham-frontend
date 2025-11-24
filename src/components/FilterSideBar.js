@@ -1,6 +1,6 @@
 'use client'
 import CheckBoxGroup from "./CheckBoxGroup";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 
 export default function FilterSideBar(props) {
@@ -12,14 +12,13 @@ export default function FilterSideBar(props) {
 
     const [membershipTypes, setMembershipTypes] = useState([
         { id: 1, name: 'Institutional Member', selected: true },
-        { id: 2, name: 'Individual Member', selected: true },
+        { id: 2, name: 'Ordinary Member', selected: true },
         { id: 3, name: 'Honorary Member', selected: true },
-        { id: 4, name: 'Lifetime Member', selected: true },
     ])
 
     const [listYears, setListYears] = useState([
         { id: 1, name: '1935', selected: true },
-        { id: 2, name: '1945', selected: true },
+        { id: 2, name: '1949', selected: true },
     ])
 
     useEffect(() => {
@@ -35,11 +34,11 @@ export default function FilterSideBar(props) {
     return (
         <div className="overflow-auto rounded-tr-sm rounded-br-sm bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10 h-full -ml-4 border-l border-gray-300">
             <div className="px-4 py-5 sm:p-6">
-                <CheckBoxGroup items={genders} setItems={setGenders} title="Genders" />
+                <CheckBoxGroup items={genders} setItems={setGenders} title="Gender" />
                 <br />
-                <CheckBoxGroup items={membershipTypes} setItems={setMembershipTypes} title="Membership Types" />
+                <CheckBoxGroup items={membershipTypes} setItems={setMembershipTypes} title="Membership Type" />
                 <br />
-                <CheckBoxGroup items={listYears} setItems={setListYears} title="List Years" />
+                <CheckBoxGroup items={listYears} setItems={setListYears} title="List Year" />
             </div>
         </div>
     )

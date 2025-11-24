@@ -7,8 +7,6 @@ import Error from './Error';
 
 export default function PageList() {
 
-    console.log('fired')
-
     const { loading, error, data } = useQuery(GET_ALL_PAGES);
 
     if (error) return <Error />;
@@ -16,8 +14,6 @@ export default function PageList() {
     if (loading) return <Loading />;
 
     const pages = data?.pages || [];
-
-    console.log(pages);
 
     return (
         <>

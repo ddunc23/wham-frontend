@@ -7,7 +7,7 @@ export default function Pagination(props) {
     {/* Current: "border-indigo-500 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400", Default: "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 hover:border-gray-300 dark:hover:border-white/20" */}
 
   return (
-    <nav className="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 dark:border-white/10">
+    <nav className="w-full bg-white flex items-center justify-between border-t border-gray-200 pb-4 mb-4 sm:px-0 dark:border-white/10">
       
         <div className="-mt-px flex w-0 flex-1">
         <a

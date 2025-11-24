@@ -1,42 +1,26 @@
 'use client'
+import Map, {Source, Marker} from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 export default function MiniMap(props) {
 
-    return <></>
+  console.log("MiniMap props:", props);
 
-
-  /*return (
-    <div className="w-full h-full">
-      <MapLibreMap
-        options={{
-            center: props.center.geometry.coordinates,
-            style: 'https://wms.wheregroup.com/tileserver/style/osm-bright.json',
-            zoom: 7
-          }}
-        className="w-full h-full"
-      />
-        <MlGeoJsonLayer
-            id="places"
-            geojson={{
-              type: 'FeatureCollection',
-              features: props.features
-            }}
-            labelOptions={{
-              maxzoom: 18,
-              minzoom: 5
-            }}
-            layerId="Circle"
-            onClick={() => {}}
-            options={{
-              paint: {
-                'circle-color': '#009EE0',
-                'circle-radius': 10
-              }
-            }}
-            type="circle"
-        /> 
-       
-
-    </div>
-  );*/
+    return (
+      <div className="h-96 w-full p-4">
+        <Map
+            initialViewState={{
+                longitude: props.lon,
+                latitude: props.lat,
+                zoom: 15.5
+            }} 
+            style={{width: '100%', height: '100%'}}
+            mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+        >
+          <Marker longitude={props.lon} latitude={props.lat} anchor="bottom" >
+            <img src="/img/location-pin.png" />
+          </Marker>
+        </Map>
+      </div>
+    )
 }

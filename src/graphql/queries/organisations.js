@@ -41,10 +41,18 @@ export const GET_ORGANISATION_BY_ID = gql`query Organisation($documentId: ID!) {
   }) {
     documentId
     Name
-    attendedBy {
-      documentId
-      FirstName
-      Surname
+    hasMembership {
+      Type
+      hasPersonMember {
+        documentId
+        FirstName
+        Surname
+      }
+    }
+    addresses {
+      lat
+      lon
+      addressString
     }
   }  
 }`

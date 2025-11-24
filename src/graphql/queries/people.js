@@ -31,25 +31,43 @@ export const GET_PERSON_BY_ID_DEEP = gql`
             DateOfBirth
             DateOfDeath
             uuid
-            attended {
-              documentId
-              Name
-              hasParentOrganisation {
-                Name
-              }
+            memberships {
+                ListYear
+                StartDate
+                Type
+                hasMemberOrganisation {
+                    documentId
+                    Name
+                    uuid
+                }
+            }
+            addresses {
+                lat
+                lon
+                addressString
             }
         }
     }`
 
 
-export const GET_ALL_PEOPLE = gql`
-    query People($page: Int, $pageSize: Int) {
-        people_connection(pagination: { page: $page, pageSize: $pageSize }, sort: "Surname:asc" ) {
+export const GET_ALL_PEOPLE = gql`query People($page: Int, $pageSize: Int, $sort: [String], $filters: PersonFiltersInput) {
+        people_connection(
+          pagination: { page: $page, pageSize: $pageSize }, sort: $sort
+          filters: $filters
+          ) {
             nodes {
                 documentId
                 uuid
                 FirstName
-                Surname  
+                Surname
+                memberships {
+                  ListYear
+                  StartDate
+                  hasMemberOrganisation {
+                    uuid
+                    Name
+                  }
+                }  
             }
             pageInfo {
                 page
