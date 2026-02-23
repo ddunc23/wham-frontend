@@ -1,16 +1,12 @@
 'use client'
-import { useQuery } from "@apollo/client/react";
-import { GET_ADDRESSES_INSTITUITIONAL_MEMBERS  } from "@/graphql/queries/addresses";
-import { ALL_MEMBERSHIPS } from "@/graphql/queries/memberships";
-import Error from "@/components/Error";
-import Loading from "@/components/Loading";
-import FilterSideBar from "@/components/FilterSideBar";
-import { useEffect, useState, useMemo } from "react";
+import MapFilterSideBar from "@/components/MapFilterSideBar";
+import { useState } from "react";
 import Map, {Source, Layer, Popup} from 'react-map-gl/maplibre';
+import Link from "next/link";
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-export default function Page(props) {
+export default function MapView(props) {
 
     const [mapFilter, setMapFilter] = useState(null);
 
@@ -19,51 +15,6 @@ export default function Page(props) {
     const [feature, setFeature] = useState(null);
 
     const [hoverId, setHoverId] = useState(null);
-
-
-    const { loading, error, data } = useQuery(ALL_MEMBERSHIPS , {
-        variables: { page: 1, pageSize: 1250},
-    });
-    
-    const geojson = useMemo(() => {
-        if (!data?.memberships_connection?.nodes) {
-            return { type: 'FeatureCollection', features: [] };
-        }
-
-        const features = data.memberships_connection.nodes.map((m, i) => {
-            const address = m.hasPersonMember?.addresses[0] || m.hasMemberOrganisation?.addresses[0];
-
-            if (address === undefined) {
-                return null;
-            }
-
-            return {
-                geometry: {
-                    coordinates: [address.lon, address.lat],
-                    type: 'Point'
-                },
-                id: i,
-                properties: {
-                    'organisation': m.hasMemberOrganisation?.Name || 'N/A',
-                    'surname': m.hasPersonMember?.Surname || 'N/A',
-                    'firstname': m.hasPersonMember?.FirstName || 'N/A',
-                    'electionYear': m.StartDate ? m.StartDate.slice(0,4) : 'N/A',
-                    'listYear': m.ListYear ? m.ListYear.slice(0,4) : 'N/A',
-                    'membershipType': m.Type ? m.Type.replace('_',' ') : 'N/A',
-                    'gender': /Miss|Mrs|miss|mrs/.test(m.hasPersonMember?.FirstName) ? 'female' : 'male',
-                }
-            };
-        }).filter(f => f !== null);
-
-        return {
-            type: 'FeatureCollection',
-            features: features
-        };
-    }, [data]);
-
-    if (error) return <Error />;
-    if (loading) return <Loading />;
-
 
     const layerStyle = {
         id: 'point',
@@ -124,7 +75,7 @@ export default function Page(props) {
             }
             interactiveLayerIds={['points']}
             >
-                <Source id="my-data" type="geojson" data={geojson}>
+                <Source id="my-data" type="geojson" data={props.geojson}>
                     <Layer {...layerStyle} id={'points'} filter={mapFilter} />
                 </Source>
 
@@ -137,11 +88,11 @@ export default function Page(props) {
                             <tbody>
                                 <tr>
                                     <td><strong>Member</strong></td>
-                                    <td>{feature?.properties.surname}, {feature?.properties.firstname}</td>
+                                    <td><Link href={`/people/${feature?.properties.personId}`}>{feature?.properties.surname}, {feature?.properties.firstname}</Link></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Institution</strong></td>
-                                    <td>{feature?.properties.organisation}</td>
+                                    <td><Link href={`/organisations/${feature?.properties.organisationId}`}>{feature?.properties.organisation}</Link></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Membership Type</strong></td>
@@ -159,7 +110,7 @@ export default function Page(props) {
             </Map>
         </div>
     </div>
-    <FilterSideBar mapFilter={mapFilter} setMapFilter={setMapFilter} geojson={geojson} />
+    <MapFilterSideBar mapFilter={mapFilter} setMapFilter={setMapFilter} geojson={props.geojson} />
     </>
     )
 }

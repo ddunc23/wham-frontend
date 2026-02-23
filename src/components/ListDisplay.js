@@ -30,11 +30,6 @@ export default function ListDisplay(props) {
                         <a href={`${props.model}/${item.documentId}`}>{item[fn.replace(/ /g, '')]}</a>
                     </td>
                   ))}
-                  {/*<td className="py-4 pr-4 pl-3 text-right text-sm whitespace-nowrap sm:pr-0">
-                    <a href={`/data/${props.model}/${item.documentId}`} className="text-indigo-600 hover:text-indigo-900">
-                      View<span className="sr-only">, {item[props.fieldnames[0].replace(/ /g, '')]}</span>
-                    </a>
-                  </td>*/}
                 </tr>
                 ))}
             </tbody>

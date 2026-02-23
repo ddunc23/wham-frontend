@@ -1,4 +1,4 @@
-import Person from "@/app/data/(display)/[model]/[uuid]/Person";
+import Person from "./Person";
 import Organisation from "./Organisation";
 
 export default async function Page({params}) {

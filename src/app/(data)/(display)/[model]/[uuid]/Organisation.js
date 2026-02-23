@@ -65,7 +65,7 @@ export default function Organisation(props) {
             {
               org?.hasMembership?.map((membership, index) => (
                 <div key={index} className="mt-4 p-4 border-t border-gray-200">                    
-                  <h4 className="text-md font-semibold"><a href={`/data/people/${membership.hasPersonMember.documentId}`}>{membership.hasPersonMember.Surname}, {membership.hasPersonMember.FirstName}</a></h4>
+                  <h4 className="text-md font-semibold"><a href={`/people/${membership.hasPersonMember.documentId}`}>{membership.hasPersonMember.Surname}, {membership.hasPersonMember.FirstName}</a></h4>
                   <p className="text-sm text-gray-600">{membership.Type.replace('_', ' ')}</p>
                 </div>
               )

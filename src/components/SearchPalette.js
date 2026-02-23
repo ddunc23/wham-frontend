@@ -76,10 +76,10 @@ export default function SearchPalette(props) {
                 props.setShow(false)
                 setQuery('')
                 if (result.__typename == 'Organisation') {
-                    router.push(`/data/organisations/${result.documentId}`)
+                    router.push(`/organisations/${result.documentId}`)
                 }
                 else if (result.__typename == 'Person') {
-                    router.push(`/data/people/${result.documentId}`)
+                    router.push(`/people/${result.documentId}`)
                 }
               }
             }}

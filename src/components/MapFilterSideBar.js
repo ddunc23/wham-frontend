@@ -1,9 +1,9 @@
 'use client'
 import CheckBoxGroup from "./CheckBoxGroup";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 
-export default function FilterSideBar(props) {
+export default function MapFilterSideBar(props) {
 
     const [genders, setGenders] = useState([
         { id: 1, name: 'male', selected: true },

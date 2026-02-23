@@ -24,7 +24,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import SearchPalette from '@/components/SearchPalette';
 import PageList from '@/components/PageList';
-import Page from '../page'
+// import Page from '../page'
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_URL }),
@@ -46,10 +46,10 @@ export default function Layout({children}) {
   const pathname = usePathname();
 
   const navigation = [
-    { name: 'Home', href: '/data', icon: HomeIcon, current: pathname === '/data' ? true : false },
-    { name: 'People', href: '/data/people', icon: UserIcon, current: pathname === '/data/people' ? true : false },
-    { name: 'Institutions', href: '/data/organisations', icon: BuildingLibraryIcon, current: pathname === '/data/organisations' ? true : false },
-    { name: 'Map', href: '/data/map', icon: MapIcon, current: pathname === '/data/map' ? true : false },
+    { name: 'Home', href: '/', icon: HomeIcon, current: pathname === '/' ? true : false },
+    { name: 'People', href: '/people', icon: UserIcon, current: pathname === '/people' ? true : false },
+    { name: 'Institutions', href: '/organisations', icon: BuildingLibraryIcon, current: pathname === '/organisations' ? true : false },
+    { name: 'Map', href: '/map', icon: MapIcon, current: pathname === '/map' ? true : false },
     // { name: 'Network', href: '/data/network', icon: UserGroupIcon, current: pathname === '/data/network' ? true : false },
   ]
 
@@ -57,14 +57,6 @@ export default function Layout({children}) {
     
     <>
       <ApolloProvider client={client}>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className='h-full'>
         <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
           <DialogBackdrop
@@ -132,6 +124,10 @@ export default function Layout({children}) {
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
+            <div className="flex flex-col shrink-0 bg-gray-800 rounded-sm -mx-2 mt-4 p-2">
+              <h1 className='text-white font-semibold text-sm/6'>Women Curators in Britain</h1>
+              <h2 className="text-gray-400 text-sm">Careeer Trajectories in a Shifting Educational Landscape</h2>
+            </div>
             <div className="flex h-16 shrink-0 items-center">
               
             </div>
@@ -196,7 +192,7 @@ export default function Layout({children}) {
           </div>
           {/* bg-[url('/img/europeana-Agwv1mKDUnc-unsplash.jpg')] bg-cover */}
           <main className="h-full">
-              <div className="px-4 sm:px-6 lg:px-8 h-full bg-[url('/img/NGA_52192.jpg')] bg-cover">
+              <div className="px-4 sm:px-6 lg:px-8 h-full bg-stone-50 bg-cover">
                 {children}
               </div>
               <SearchPalette show={showSearch} setShow={setShowSearch} />

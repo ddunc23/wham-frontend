@@ -1,6 +1,4 @@
 'use client';
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { strapi } from '@strapi/client';
 import { useQuery } from "@apollo/client/react";
 import { GET_ALL_PEOPLE } from '../../graphql/queries/people';
 import Loading from '../../components/Loading';
@@ -43,6 +41,18 @@ export default function People() {
     const pageInfo = data?.people_connection?.pageInfo || {};
 
     const fieldnames = Object.keys(flatPeople[0] || {}).map(fn => ['documentId', '__typename', 'uuid'].includes(fn) ? null :  fn.replace(/([A-Z])/g, ' $1' ).trim()).filter(fn => fn);
+
+    const filterableFields = ['ListYear', 'ElectionYear'];
+
+    const filterableFieldTypes = {
+      'ListYear': 'number',
+      'ElectionYear': 'number',
+    };
+
+    const filterableFieldOptions = {
+      'ListYear': Array.from(new Set(flatPeople.map(p => p.ListYear))).sort(),
+      'ElectionYear': Array.from(new Set(flatPeople.map(p => p.ElectionYear))).sort(),
+    };
 
     return (
       <div className='h-full w-full relative flex flex-col gap-4 p-4'>

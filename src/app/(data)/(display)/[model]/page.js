@@ -1,5 +1,5 @@
-import People from "@/app/data/people";
-import Institutions from "@/app/data/institutions";
+import People from "@/app/(data)/people";
+import Institutions from "@/app/(data)/institutions";
 
 export default async function Page({params}) {
 

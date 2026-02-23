@@ -1,6 +1,4 @@
 'use client';
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { strapi } from '@strapi/client';
 import { useQuery } from "@apollo/client/react";
 import { GET_ALL_ORGANISATIONS } from '@/graphql/queries/organisations';
 import Loading from '../../components/Loading';

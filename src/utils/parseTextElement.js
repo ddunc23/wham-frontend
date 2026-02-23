@@ -29,6 +29,28 @@ export default function parseTextElement(textElement) {
         );
     }
 
+    if (textElement.type === 'heading') {
+        return <h3 className="font-bold my-2">{textElement.children[0].text}</h3>;
+    }
+
+    if (textElement.type === 'list') {
+        return (
+            <ul className="list-disc list-inside my-2">
+                {textElement.children.map((item, index) => (
+                    item.children ? (
+                        <li key={index}>
+                            {item.children.map((child, childIndex) => (
+                                <span key={childIndex}>{child.text}</span>
+                            ))}
+                        </li>
+                    ) : (
+                        <li key={index}>{item.text}</li>
+                    )
+                ))}
+            </ul>
+        );
+    }
+
     if (textElement.type === 'numbered-list') {
         return (
             <ol className="list-decimal list-inside my-2">

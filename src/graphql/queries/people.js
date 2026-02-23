@@ -31,6 +31,12 @@ export const GET_PERSON_BY_ID_DEEP = gql`
             DateOfBirth
             DateOfDeath
             uuid
+            Bio
+            Photo {
+                url
+                caption
+                alternativeText
+            }
             memberships {
                 ListYear
                 StartDate

@@ -1,35 +1,28 @@
-import parseFuzzyDate from "@/utils/parseFuzzyDate"
-
+import parseTextElement from "@/utils/parseTextElement";
 export default function Bio(props) {
 
-    return (
-        <>
-        <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm">
-            <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-lg font-bold">{props.Surname}, {props.FirstName}</h3>
-            </div>
-            <div className="px-4 py-5 sm:p-6">
-                <dl className="divide-y divide-gray-200">
-                    <div className="py-3 sm:py-4">
-                        <dt className="text-sm font-medium text-gray-500">Date of Birth</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{}</dd>
+    return props.person.Bio && (
+        <div className="max-w-none mt-4 grid grid-cols-3 gap-4">
+            <div className="col-span-2">
+                {props.person.Bio.map((element, index) => (
+                    <div key={index} className="mb-2 text-gray-700">
+                        {parseTextElement(element)}
                     </div>
-                    <div className="py-3 sm:py-4">
-                        <dt className="text-sm font-medium text-gray-500">Date of Death</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{}</dd>
-                    </div>
-                </dl>
+                ))}
             </div>
+            {props.person.Photo && (
+            <div>
+                <img
+                    src={process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL + props.person.Photo.url}
+                    alt={props.person.Photo.alternativeText || props.person.Photo.caption || 'Person Image'} 
+                    className="w-full h-auto rounded-sm object-cover object-center object-top"
+                />
+                {props.person.Photo.caption && (
+                    <p className="text-sm text-gray-500 mt-2">{props.person.Photo.caption}</p>
+                )}
+            </div>
+            )}
         </div>
-        <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mt-6">
-            <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-lg font-bold">Biography</h3>
-            </div>
-            <div className="px-4 py-5 sm:p-6">
-                <p>{props.biography}</p>
-            </div>
-        </div>
-        </>
     )
-    }
+}
       

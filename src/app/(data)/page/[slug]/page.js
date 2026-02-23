@@ -22,8 +22,21 @@ export default function Page() {
     }
 
     return (
-        <div className="col-span-3 h-full overflow-auto rounded-lg bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10 col-span-4 mt-8 mb-24">
+        <div className="col-span-4 h-full overflow-auto rounded-lg bg-white shadow-sm dark:bg-gray-800/50 dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10 mt-8 mb-24">
             <div className="px-4 py-5 sm:p-6">
+                {page.Photo && (
+                    <div className="mb-6">
+                        <img
+                            src={process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL + page.Photo.url}
+                            alt={page.Photo.alternativeText || page.Photo.caption || 'Page Image'
+                            }
+                            className="w-full h-100 rounded-sm object-cover object-center object-top"
+                        />
+                        {page.Photo.caption && (
+                            <p className="text-sm text-gray-500 mt-2">{page.Photo.caption}</p>
+                        )}
+                    </div>
+                )}
                 <article className="prose">
                     <h1>{page.Title}</h1>
                     {page.Body.map((element, index) => (
