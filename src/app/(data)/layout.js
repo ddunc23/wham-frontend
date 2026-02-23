@@ -24,7 +24,8 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
 import SearchPalette from '@/components/SearchPalette';
 import PageList from '@/components/PageList';
-// import Page from '../page'
+
+import Link from 'next/link';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_URL }),
@@ -86,7 +87,7 @@ export default function Layout({children}) {
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <a
+                            <Link
                               href={item.href}
                               className={classNames(
                                 item.current
@@ -97,19 +98,19 @@ export default function Layout({children}) {
                             >
                               <item.icon aria-hidden="true" className="size-6 shrink-0" />
                               {item.name}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
                     </li>
                     <li className="mt-auto">
-                      <a
+                      <Link
                         href="#"
                         className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white"
                       >
                         <Cog6ToothIcon aria-hidden="true" className="size-6 shrink-0" />
                         Settings
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                   <PageList />
@@ -137,7 +138,7 @@ export default function Layout({children}) {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
+                        <Link
                           href={item.href}
                           className={classNames(
                             item.current
@@ -148,7 +149,7 @@ export default function Layout({children}) {
                         >
                           <item.icon aria-hidden="true" className="size-6 shrink-0" />
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
